@@ -108,7 +108,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 justify-center">
             <span className="text-gray-400 font-semibold">Service:</span>
             <select
-              value={selectedService.name}
+              value={services[serviceIndex].name}
               onChange={(e) => {
                 const idx = services.findIndex((s) => s.name === e.target.value)
                 if (idx !== -1) {
@@ -118,9 +118,10 @@ export default function Home() {
               }}
               className="rounded-xl border-2 border-blue-800/40 bg-gray-900 px-4 py-2 text-base sm:text-lg text-white focus:border-cyan-400 focus:outline-none shadow w-full sm:w-auto"
             >
-              {services.map((service) => (
-                <option key={service.name} value={service.name}>
+              {services.map((service, idx) => (
+                <option key={service.name} value={service.name} className={idx === serviceIndex ? 'bg-blue-900 text-cyan-300 font-bold' : ''}>
                   {service.name}
+                  {idx === serviceIndex ? ' (Used)' : ''}
                 </option>
               ))}
             </select>
