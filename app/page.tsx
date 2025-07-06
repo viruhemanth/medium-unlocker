@@ -80,6 +80,14 @@ export default function Home() {
     }
   }
 
+  const handleClear = () => {
+    setUrl('')
+    setFinalUrl('')
+    setError('')
+    setShowDrawer(false)
+    setIframeError(false)
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-gray-900 to-black p-4 sm:p-8 text-white">
       <div className="w-full max-w-2xl rounded-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-blue-950 p-4 sm:p-10 shadow-2xl border border-blue-800/40">
@@ -127,7 +135,7 @@ export default function Home() {
               {loading ? 'Trying best service...' : 'Unlock & Read'}
             </button>
             <button
-              onClick={() => setUrl('')}
+              onClick={handleClear}
               className="w-full sm:w-auto rounded-xl bg-gray-700 px-6 sm:px-8 py-3 sm:py-4 font-bold text-base sm:text-lg text-white hover:bg-gray-600 focus:outline-none shadow"
             >
               Clear
@@ -137,7 +145,7 @@ export default function Home() {
 
         {error && <p className="mt-6 text-center text-base sm:text-lg text-red-400 font-semibold drop-shadow">{error}</p>}
 
-        {finalUrl && !loading && !error && (
+        {finalUrl && !loading && !error && url && (
           <>
             {typeof window !== 'undefined' && window.open(finalUrl, '_blank')}
             <div className="mt-10 text-center animate-fade-in">
